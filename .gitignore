@@ -1,4 +1,6 @@
-# Ignore everything
+# Allowlist: everything is ignored, except the files and directories listed below.
+# Add every new top-level file or directory here, otherwise it is not committed.
+# This prevents accidental commits of secrets, dumps, builds or editor files.
 *
 
 # Allow specific core files
@@ -6,14 +8,13 @@
 !/.ddev/config.yaml
 !/.env.example.php
 !/.gitignore
+!/LICENSE
 !/composer.json
 !/phpstan.neon
 !/README.md
 
-# Allow specific ddirectories
+# Allow specific directories
 !/app/
 !/app/**
-
-# Allow specific ddirectories
 !/public/
 !/public/**

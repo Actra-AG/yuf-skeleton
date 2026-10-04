@@ -42,6 +42,13 @@ app/
   cache/, logs/             # created at runtime (not committed)
 ```
 
+### Git: allowlist
+
+`.gitignore` ignores everything except the files and directories it explicitly lists. This prevents accidental commits
+of secrets, database dumps, builds or editor files. When you add a new top-level file or directory (e.g. `src/` or
+`tests/`), add it to `.gitignore`, otherwise it is not committed. Check with `git status --ignored` if a file is
+missing.
+
 ## How a request is handled
 
 For `https://my-project.ddev.site/` (or `/index.html`):
