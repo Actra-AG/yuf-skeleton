@@ -1,0 +1,29 @@
+{
+  "name": "actra/yuf-skeleton",
+  "description": "A minimal \"Hello World\" application to start a new project with the yuf framework.",
+  "type": "project",
+  "keywords": ["php", "framework", "skeleton", "yuf", "actra"],
+  "homepage": "https://github.com/Actra-AG/yuf-skeleton",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.5",
+    "actra/autoloader": "^1.1",
+    "actra/yuf": "^3.2"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.2"
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "@php -r \"file_exists('.env.php') || copy('.env.example.php', '.env.php');\""
+    ],
+    "phpstan": "phpstan analyse --memory-limit=-1",
+    "check": [
+      "@phpstan"
+    ]
+  },
+  "scripts-descriptions": {
+    "phpstan": "Run the static analysis (PHPStan level 10)",
+    "check": "Run all checks"
+  }
+}

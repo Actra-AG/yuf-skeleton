@@ -1,0 +1,6 @@
+# The project name defaults to the directory name: https://<directory-name>.ddev.site
+type: php
+docroot: public
+php_version: "8.5"
+webserver_type: apache-fpm
+omit_containers: [db]

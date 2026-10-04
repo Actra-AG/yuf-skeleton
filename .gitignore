@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow specific core files
+!/.ddev/
+!/.ddev/config.yaml
+!/.env.example.php
+!/.gitignore
+!/composer.json
+!/phpstan.neon
+!/README.md
+
+# Allow specific ddirectories
+!/app/
+!/app/**
+
+# Allow specific ddirectories
+!/public/
+!/public/**
