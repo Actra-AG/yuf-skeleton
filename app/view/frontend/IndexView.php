@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @copyright Actra AG - https://www.actra.ch
+ * @license   MIT
+ */
+
 declare(strict_types=1);
 
 namespace app\view\frontend;
@@ -21,7 +26,7 @@ final class IndexView extends BaseView
             ipWhitelist: [],
             authUser: null,
             requiredAccessRights: AccessRightCollection::createEmpty(),
-            inputParameterCollection: new InputParameterCollection()
+            inputParameterCollection: new InputParameterCollection(),
         );
     }
 

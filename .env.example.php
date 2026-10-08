@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @copyright Actra AG - https://www.actra.ch
+ * @license   MIT
+ */
+
 declare(strict_types=1);
 
 // Copy to .env.php (done automatically by "composer create-project") and adjust it per environment.

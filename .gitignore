@@ -6,10 +6,15 @@
 # Allow specific core files
 !/.ddev/
 !/.ddev/config.yaml
+!/.editorconfig
 !/.env.example.php
 !/.gitignore
+!/.php-cs-fixer.dist.php
+!/AGENTS.md
+!/AGENTS.project.md
 !/LICENSE
 !/composer.json
+!/phpstan-baseline.neon
 !/phpstan.neon
 !/README.md
 

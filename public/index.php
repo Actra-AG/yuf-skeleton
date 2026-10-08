@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @copyright Actra AG - https://www.actra.ch
+ * @license   MIT
+ */
+
 declare(strict_types=1);
 
 use actra\yuf\Core;
@@ -17,7 +22,7 @@ require __DIR__ . '/../vendor/actra/yuf/src/Core.php';
 // Registers actra/autoloader (classes with the prefix "app\" are loaded from app/) and creates missing app/ directories
 $core = Core::fromEnvironment(
     envFilePath: __DIR__ . '/../.env.php',
-    copyrightYear: 2026
+    copyrightYear: 2026,
 );
 $english = new Language(code: 'en', locale: 'en_US.UTF-8');
 $core->availableLanguages->add(language: $english);
@@ -36,11 +41,11 @@ $core->prepareHttpResponse(
                 language: $english,
                 viewFactory: new ViewMap()->add(
                     fileTitle: 'index',
-                    create: fn(ViewContext $context): BaseView => new IndexView(context: $context)
-                )
+                    create: fn(ViewContext $context): BaseView => new IndexView(context: $context),
+                ),
             ),
-        ]
+        ],
     ),
     // No PHP session needed for this example
-    individualSessionHandler: false
+    individualSessionHandler: false,
 )->sendAndExit();
