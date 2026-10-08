@@ -22,10 +22,14 @@ This project follows the Actra coding standard, installed as development depende
 - TODO: replace this placeholder with the rules of this project (architecture, directories, allowed tools).
 - Adapt the copyright and the license in the file header (`header_comment` in `.php-cs-fixer.dist.php`), then run
   `composer cs:fix`.
-- Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`).
+- Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,
+  for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see README.md, "Add a page").
 - Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
   through `Core` without globals.
 
 ## Deviations from the global standard
 
-- None.
+- View classes found by `ClassNameViewFactory` (routes without `viewFactory`, e.g. `app/view/auto/php/welcome.php`)
+  have a lowercase class name equal to the file title (`welcome`) in the namespace `app\view\<viewGroup>\php`, not
+  PascalCase ([naming.md](vendor/actra/coding-standard/standards/naming.md)). Reason: yuf builds the class name from
+  the requested file name. Applies only to these view classes; everything else in them follows the standard.

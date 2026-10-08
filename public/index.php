@@ -29,9 +29,8 @@ $core->availableLanguages->add(language: $english);
 $core->prepareHttpResponse(
     routeCollection: new RouteCollection(
         routes: [
-            // "/" and "/index.html" are handled by app\view\frontend\IndexView: the ViewMap maps the file name "index"
-            // to it. Without viewFactory, yuf would use the class app\view\frontend\php\index (the class name is built
-            // from the view group and the file name).
+            // Explicit ViewMap: maps the file name "index" to app\view\frontend\IndexView (any class name, constructor
+            // dependencies possible)
             new Route(
                 path: '/',
                 viewDirectory: $core->viewDirectory,
@@ -43,6 +42,16 @@ $core->prepareHttpResponse(
                     fileTitle: 'index',
                     create: fn(ViewContext $context): BaseView => new IndexView(context: $context),
                 ),
+            ),
+            // Automatic detection by file name (no viewFactory, nothing registered): /auto/<name>.html uses the class
+            // app\view\auto\php\<name> if it exists, otherwise html/<name>.html is rendered without view
+            new Route(
+                path: '/auto/',
+                viewDirectory: $core->viewDirectory,
+                viewGroup: 'auto',
+                defaultFileName: 'welcome.html',
+                defaultContentType: ContentType::createHtml(),
+                language: $english,
             ),
         ],
     ),

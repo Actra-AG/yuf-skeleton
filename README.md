@@ -38,6 +38,11 @@ app/
     IndexView.php           # view class for /index.html (registered in public/index.php)
     html/index.html         # content of /index.html
     templates/default.html  # page layout around the content
+  view/auto/                # view group "auto" of the route "/auto/" (automatic view detection)
+    php/welcome.php         # view class for /auto/welcome.html (found by file name, not registered)
+    html/welcome.html       # content of /auto/welcome.html (default file of /auto/)
+    html/about.html         # content of /auto/about.html (no view)
+    templates/default.html  # page layout of this view group
   error_docs/               # error pages (debug, not found, unauthorized, default)
   cache/, logs/             # created at runtime (not committed)
 AGENTS.md                   # instructions for developers and AI assistants (refers to the coding standard)
@@ -56,6 +61,13 @@ missing.
 
 ## How a request is handled
 
+`public/index.php` has two routes that show both ways to find the view of a page:
+
+- `/` with a `ViewMap`: each view is registered explicitly. Views can have any class name and constructor dependencies.
+- `/auto/` without `viewFactory`: yuf finds the view by the file name (`ClassNameViewFactory`). Nothing is registered.
+
+### With ViewMap
+
 For `https://my-project.ddev.site/` (or `/index.html`):
 
 1. `public/index.php` creates `Core` with `Core::fromEnvironment()` (it reads `.env.php`) and registers the routes.
@@ -66,9 +78,23 @@ For `https://my-project.ddev.site/` (or `/index.html`):
    file `html/index.html`. `{tst:text value='greeting'}` prints a value set by the view. `addText()` escapes plain
    texts, `addHtml()` outputs trusted HTML as it is.
 
+### Automatic view detection
+
+For `https://my-project.ddev.site/auto/welcome.html` (or `/auto/`, the file name defaults to `welcome.html`):
+
+1. The route `/auto/` with the view group `auto` matches. It has no `viewFactory`.
+2. yuf builds the class name from the view group and the file title: `app\view\auto\php\welcome`, loaded from
+   `app/view/auto/php/welcome.php`, and creates it with `new $className(context: $context)`.
+3. If there is no such class (e.g. `/auto/about.html`), the page is rendered from `html/about.html` without view. If
+   there is no content file either, the response is 404.
+
+The class name equals the file title, so these view classes are lowercase (`welcome`). This is the only allowed
+deviation from the naming rules of the coding standard (see `AGENTS.md`). A page without view cannot set values, so
+the template of `auto` has a fixed title.
+
 ## Add a page
 
-To add `/about.html`:
+**With ViewMap** (route `/`), to add `/about.html`:
 
 1. Create `app/view/frontend/html/about.html` with the content.
 2. Create the view class `app/view/frontend/AboutView.php` (a copy of `IndexView`). It must set every value the
@@ -79,6 +105,16 @@ To add `/about.html`:
        ->add(fileTitle: 'index', create: fn(ViewContext $context): BaseView => new IndexView(context: $context))
        ->add(fileTitle: 'about', create: fn(ViewContext $context): BaseView => new AboutView(context: $context)),
    ```
+
+**Automatic** (route `/auto/`), to add `/auto/contact.html`:
+
+1. Create `app/view/auto/html/contact.html` with the content. This is enough for a static page.
+2. If the page needs a view, create `app/view/auto/php/contact.php` with the class `app\view\auto\php\contact` (a copy
+   of `welcome`). Nothing has to be registered.
+
+**When to use which:** use the `ViewMap` when views need dependencies (repositories, services) or meaningful class
+names, which is the case for most pages of an application. Use the automatic detection for many simple or static pages
+that need no dependencies.
 
 ## Checks
 
