@@ -41,6 +41,7 @@ app/
   error_docs/               # error pages (debug, not found, unauthorized, default)
   cache/, logs/             # created at runtime (not committed)
 AGENTS.md                   # instructions for developers and AI assistants (refers to the coding standard)
+CLAUDE.md                   # makes Claude Code read AGENTS.md
 .php-cs-fixer.dist.php      # code style (rules of the coding standard)
 phpstan.neon                # static analysis (config of the coding standard)
 tests/                      # PHPUnit tests (phpunit.xml)
@@ -102,4 +103,4 @@ a "Project-specific rules" section for your own rules. Replace the placeholders 
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE). `composer create-project` removes the `LICENSE` file from new projects: choose your own license.

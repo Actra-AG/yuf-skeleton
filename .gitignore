@@ -12,6 +12,7 @@
 !/.php-cs-fixer.dist.php
 !/AGENTS.md
 !/AGENTS.project.md
+!/CLAUDE.md
 !/LICENSE
 !/composer.json
 !/phpstan-baseline.neon
