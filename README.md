@@ -128,7 +128,8 @@ PHPUnit tests. Fix the code style with `composer cs:fix`. With DDEV: `ddev compo
 The project follows the [Actra coding standard](https://github.com/Actra-AG/coding-standard)
 (`actra/coding-standard`, a dev dependency). `composer create-project` creates an `AGENTS.md` that refers to it and has
 a "Project-specific rules" section for your own rules. Replace the placeholders `[Your company or name]` and
-`[License of your project]` in the file header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
+`[License of your project]` in the file header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`. Adapt `name`,
+`description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the skeleton.
 
 ## Production
 
@@ -139,4 +140,5 @@ a "Project-specific rules" section for your own rules. Replace the placeholders 
 
 ## License
 
-MIT, see [LICENSE](LICENSE). `composer create-project` removes the `LICENSE` file from new projects: choose your own license.
+MIT, see [LICENSE](LICENSE). `composer create-project` removes the `LICENSE` file from new projects: choose your own
+license, add a `LICENSE` file if needed, and set it as `license` in `composer.json` and in the file header.

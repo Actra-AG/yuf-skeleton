@@ -22,6 +22,8 @@ This project follows the Actra coding standard, installed as development depende
 - TODO: replace this placeholder with the rules of this project (architecture, directories, allowed tools).
 - Adapt the copyright and the license in the file header (`header_comment` in `.php-cs-fixer.dist.php`), then run
   `composer cs:fix`.
+- Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json` (they still describe the
+  skeleton); `license` is the same as in the file header.
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,
   for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see README.md, "Add a page").
 - Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
