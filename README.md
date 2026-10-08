@@ -31,11 +31,11 @@ root. HTTPS is required (yuf redirects HTTP to HTTPS), and all requests for non-
 ```
 .env.php                    # environment settings (not committed)
 public/
-  index.php                 # front controller: initializes yuf and defines the routes
+  index.php                 # front controller: initializes yuf and defines the routes and the views
   .htaccess                 # sends all requests to index.php
 app/
   view/frontend/            # view group "frontend" of the route "/"
-    php/index.php           # view class for /index.html
+    IndexView.php           # view class for /index.html (registered in public/index.php)
     html/index.html         # content of /index.html
     templates/default.html  # page layout around the content
   error_docs/               # error pages (debug, not found, unauthorized, default)
@@ -53,20 +53,27 @@ missing.
 
 For `https://my-project.ddev.site/` (or `/index.html`):
 
-1. `public/index.php` initializes `Core` with `.env.php` and registers the routes.
+1. `public/index.php` creates `Core` with `Core::fromEnvironment()` (it reads `.env.php`) and registers the routes.
 2. The route `/` with the view group `frontend` matches. The file name defaults to `index.html`.
-3. yuf creates the view class `app\view\frontend\php\index`: `app\view\` + view group + `\php\` + file name without
-   extension. Its `execute()` method sets the values for the page.
+3. The `ViewMap` of the route maps the file name `index` to the view `app\view\frontend\IndexView`; yuf creates it with
+   the `ViewContext` of the request. Its `execute()` method sets the values for the page.
 4. The template `templates/default.html` is rendered, and `<tst:loadSubTpl tplfile="{this}"/>` includes the content
-   file `html/index.html`. `{tst:text value='greeting'}` prints a value set by the view, HTML-escaped.
+   file `html/index.html`. `{tst:text value='greeting'}` prints a value set by the view. `addText()` escapes plain
+   texts, `addHtml()` outputs trusted HTML as it is.
 
 ## Add a page
 
 To add `/about.html`:
 
 1. Create `app/view/frontend/html/about.html` with the content.
-2. Create the view class `app/view/frontend/php/about.php` (class `about`, a copy of `index`). It must set every value
-   the template and content use (e.g. `title`), otherwise rendering fails with a clear error message.
+2. Create the view class `app/view/frontend/AboutView.php` (a copy of `IndexView`). It must set every value the
+   template and content use (e.g. `title`), otherwise rendering fails with a clear error message.
+3. Register it in the `ViewMap` of the route in `public/index.php`:
+   ```php
+   viewFactory: new ViewMap()
+       ->add(fileTitle: 'index', create: fn(ViewContext $context): BaseView => new IndexView(context: $context))
+       ->add(fileTitle: 'about', create: fn(ViewContext $context): BaseView => new AboutView(context: $context)),
+   ```
 
 ## Checks
 
@@ -80,6 +87,8 @@ Runs PHPStan (level 10) for `app/` and `public/`. With DDEV: `ddev composer chec
 
 - Set `'debug' => false`, your real domain(s) in `allowedDomains`, and a valid `logEmailRecipient` in `.env.php`.
 - Install without development tools: `composer install --no-dev`.
+- Use `opcache.validate_timestamps=0` and reset the opcache on every deployment (see "Production settings" in the
+  [yuf README](https://github.com/Actra-AG/yuf#production-settings)).
 
 ## License
 
