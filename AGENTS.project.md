@@ -11,7 +11,6 @@ This project follows the Actra coding standard, installed as development depende
   there before working on this project. They are binding. If `vendor/` is missing, run `composer install` first.
 - The rules below only **add** project-specific rules or state explicit deviations (with reason). They take precedence
   over the global standard where they conflict.
-- `composer check` (code style, PHPStan, tests) must be green. Fix the code style with `composer cs:fix`.
 
 ## Project context
 
@@ -24,9 +23,8 @@ This project follows the Actra coding standard, installed as development depende
 - Adapt the copyright and the license in the file header (`header_comment` in `.php-cs-fixer.dist.php`), then run
   `composer cs:fix`.
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`).
-- The `test` script is a placeholder. Add PHPUnit (`composer require --dev phpunit/phpunit`) and set the script to
-  `phpunit` as soon as the project has logic to test.
-- Run the application and the checks with DDEV (`ddev composer check`) if the project has a `.ddev/` configuration.
+- Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
+  through `Core` without globals.
 
 ## Deviations from the global standard
 

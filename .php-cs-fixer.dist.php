@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Actra AG - https://www.actra.ch
- * @license   MIT
+ * @copyright [Your company or name]
+ * @license   [License of your project]
  */
 
 declare(strict_types=1);
@@ -19,9 +19,9 @@ return new Config()
     ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRules([
         ...$rules,
-        // Adapt copyright and license to your project
+        // Replace the placeholders by the copyright holder and the license of your project, then run cs:fix
         'header_comment' => [
-            'header' => "@copyright Actra AG - https://www.actra.ch\n@license   MIT",
+            'header' => "@copyright [Your company or name]\n@license   [License of your project]",
             'comment_type' => 'PHPDoc',
             'location' => 'after_open',
             'separate' => 'both',
@@ -32,6 +32,7 @@ return new Config()
             ->in([
                 __DIR__ . '/app',
                 __DIR__ . '/public',
+                __DIR__ . '/tests',
             ])
             // Template cache, generated at runtime
             ->exclude(['cache'])

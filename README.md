@@ -43,6 +43,7 @@ app/
 AGENTS.md                   # instructions for developers and AI assistants (refers to the coding standard)
 .php-cs-fixer.dist.php      # code style (rules of the coding standard)
 phpstan.neon                # static analysis (config of the coding standard)
+tests/                      # PHPUnit tests (phpunit.xml)
 ```
 
 ### Git: allowlist
@@ -84,13 +85,13 @@ To add `/about.html`:
 composer check
 ```
 
-Runs the code style check (PHP-CS-Fixer), PHPStan (level 10, strict) for `app/` and `public/`, and the tests (none
-yet). Fix the code style with `composer cs:fix`. With DDEV: `ddev composer check`.
+Runs the code style check (PHP-CS-Fixer), PHPStan (level 10, strict) for `app/`, `public/` and `tests/`, and the
+PHPUnit tests. Fix the code style with `composer cs:fix`. With DDEV: `ddev composer check`.
 
 The project follows the [Actra coding standard](https://github.com/Actra-AG/coding-standard)
 (`actra/coding-standard`, a dev dependency). `composer create-project` creates an `AGENTS.md` that refers to it and has
-a "Project-specific rules" section for your own rules. Adapt the copyright and license in the file header
-(`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
+a "Project-specific rules" section for your own rules. Replace the placeholders `[Your company or name]` and
+`[License of your project]` in the file header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
 
 ## Production
 

@@ -9,6 +9,7 @@ parameters:
     paths:
         - app
         - public
+        - tests
     excludePaths:
         # Compiled templates, generated at runtime
         - app/cache (?)

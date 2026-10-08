@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Actra AG - https://www.actra.ch
- * @license   MIT
+ * @copyright [Your company or name]
+ * @license   [License of your project]
  */
 
 declare(strict_types=1);

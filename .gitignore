@@ -16,6 +16,7 @@
 !/composer.json
 !/phpstan-baseline.neon
 !/phpstan.neon
+!/phpunit.xml
 !/README.md
 
 # Allow specific directories
@@ -23,3 +24,5 @@
 !/app/**
 !/public/
 !/public/**
+!/tests/
+!/tests/**
