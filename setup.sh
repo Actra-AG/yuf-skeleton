@@ -30,11 +30,6 @@ ddev composer create-project actra/yuf-skeleton
 # Apply the DDEV configuration of the skeleton (Apache, document root public/)
 ddev restart
 
-# An application commits its locked dependency versions (the skeleton itself must not)
-awk '{ print } $0 == "!/composer.json" { print "!/composer.lock" }' .gitignore > .gitignore.tmp
-mv .gitignore.tmp .gitignore
-grep --quiet --line-regexp '!/composer.lock' .gitignore || fail "Could not add composer.lock to .gitignore."
-
 git init --quiet --initial-branch=main
 git add --all
 git commit --quiet --message="chore: create project from yuf skeleton"

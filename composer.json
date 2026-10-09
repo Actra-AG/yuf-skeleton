@@ -17,7 +17,8 @@
   "scripts": {
     "post-create-project-cmd": [
       "@php -r \"file_exists('.env.php') || file_put_contents('.env.php', str_replace('my-project.ddev.site', parse_url(getenv('DDEV_PRIMARY_URL') ?: 'https://my-project.ddev.site', PHP_URL_HOST), file_get_contents('.env.example.php')));\"",
-      "@php -r \"copy('AGENTS.project.md', 'AGENTS.md'); unlink('AGENTS.project.md'); file_exists('LICENSE') && unlink('LICENSE'); unlink('setup.sh');\""
+      "@php -r \"copy('AGENTS.project.md', 'AGENTS.md'); unlink('AGENTS.project.md'); file_exists('LICENSE') && unlink('LICENSE'); unlink('setup.sh');\"",
+      "@php -r \"file_put_contents('.gitignore', str_replace('!/composer.json' . chr(10), '!/composer.json' . chr(10) . '!/composer.lock' . chr(10), file_get_contents('.gitignore')));\""
     ],
     "cs": "php-cs-fixer check --diff",
     "cs:fix": "php-cs-fixer fix",
