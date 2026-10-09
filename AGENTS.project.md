@@ -14,18 +14,20 @@ This project follows the Actra coding standard, installed as development depende
 
 ## Project context
 
-- A project based on the [yuf skeleton](https://github.com/Actra-AG/yuf-skeleton) (framework: actra/yuf).
-- TODO: describe the project, its users and how versions are released.
+- A project based on the [yuf skeleton](https://github.com/Actra-AG/yuf-skeleton) (framework: actra/yuf, PHP 8.5).
+- TODO: describe the project, its users, how versions are released and ongoing goals.
 
 ## Project-specific rules
 
 - TODO: replace this placeholder with the rules of this project (architecture, directories, allowed tools).
+- TODO: run the application (DDEV): `https://<project>.ddev.site/`.
 - Adapt the copyright and the license in the file header (`header_comment` in `.php-cs-fixer.dist.php`), then run
   `composer cs:fix`.
 - Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json` (they still describe the
   skeleton); `license` is the same as in the file header.
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,
-  for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see README.md, "Add a page").
+  for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see
+  [docs/views.md](docs/views.md)).
 - Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
   through `Core` without globals.
 

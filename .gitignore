@@ -23,6 +23,8 @@
 # Allow specific directories
 !/app/
 !/app/**
+!/docs/
+!/docs/**
 !/public/
 !/public/**
 !/tests/
