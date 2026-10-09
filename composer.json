@@ -8,7 +8,7 @@
   "require": {
     "php": ">=8.5",
     "actra/autoloader": "^1.2.0",
-    "actra/yuf": "^4.67.0"
+    "actra/yuf": "^4.67.2"
   },
   "require-dev": {
     "actra/coding-standard": "^1.14.0",

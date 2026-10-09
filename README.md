@@ -83,4 +83,6 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
 ## License
 
 MIT, see [LICENSE](LICENSE). `composer create-project` removes the `LICENSE` file from new projects: choose your own
-license, add a `LICENSE` file if needed, and set it as `license` in `composer.json` and in the file header.
+license, add a `LICENSE` file if needed, and set it as `license` in `composer.json` and in the file header. Projects
+under any license, including proprietary ones, may use yuf (`MIT AND LGPL-2.1-only AND Apache-2.0`, see
+[yuf: License](vendor/actra/yuf/README.md#license)).
