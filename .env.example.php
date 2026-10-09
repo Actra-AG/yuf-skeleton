@@ -20,4 +20,6 @@ return [
     // Shows error details in the browser; never enable it in production
     'debug' => true,
     'robots' => 'noindex,nofollow',
+    // Optional, default: the value of debug. Without checks (production), clear app/cache/v*/ on every deployment
+    // 'checkTemplateChanges' => false,
 ];

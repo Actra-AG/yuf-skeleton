@@ -83,8 +83,8 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
 
 - Set `'debug' => false`, your real domain(s) in `allowedDomains`, and a valid `logEmailRecipient` in `.env.php`.
 - Install without development tools: `composer install --no-dev`.
-- Use `opcache.validate_timestamps=0` and reset the opcache on every deployment (see
-  [yuf: Production](vendor/actra/yuf/docs/setup.md#production)).
+- On every deployment, reset the opcache (`opcache.validate_timestamps=0`) and delete `app/cache/v*/`: without
+  `debug`, changed templates are not compiled again (see [yuf: Production](vendor/actra/yuf/docs/setup.md#production)).
 
 ## License
 

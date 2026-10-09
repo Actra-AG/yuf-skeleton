@@ -22,6 +22,10 @@ For `https://my-project.ddev.site/` (or `/index.html`):
    file `html/index.html`. `{tst:text value='greeting'}` prints a value set by the view. `addText()` escapes plain
    texts, `addHtml()` outputs trusted HTML as it is.
 
+HTML responses are not cached by browsers; a page without personal data can call
+`respondNotModifiedIfUnchanged(dataVersion: …)` first in `execute()` to answer `304` before rendering (see
+[views.md](../vendor/actra/yuf/docs/views.md)).
+
 ### Automatic view detection
 
 For `https://my-project.ddev.site/auto/welcome.html` (or `/auto/`, the file name defaults to `welcome.html`):

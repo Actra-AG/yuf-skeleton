@@ -22,7 +22,7 @@ This repository follows the Actra coding standard, installed as development depe
   it generic with a "Project-specific rules" placeholder; do not put rules about the skeleton itself there.
 - The file header is a neutral placeholder (`[Your company or name]`, `[License of your project]` in
   `.php-cs-fixer.dist.php`), because new projects adapt it. Do not replace it by a real copyright holder.
-- Run the application (DDEV): https://yuf-skeleton.ddev.site/ (Hello World 200, unknown page 404).
+- Run the application (DDEV): https://yuf-skeleton.ddev.site/ (`/` and `/auto/` give 200, an unknown page gives 404).
 
 ## Deviations from the global standard
 
