@@ -20,6 +20,8 @@ This repository follows the Actra coding standard, installed as development depe
 
 - `AGENTS.project.md` is the `AGENTS.md` of **new projects**: `composer create-project` copies it to `AGENTS.md`. Keep
   it generic with a "Project-specific rules" placeholder; do not put rules about the skeleton itself there.
+- `setup.sh` creates a new project with DDEV; README.md runs it from the `main` branch, and `composer create-project`
+  removes it from new projects. Test changes with a full run (`bash setup.sh <name>` in an empty directory).
 - The file header is a neutral placeholder (`[Your company or name]`, `[License of your project]` in
   `.php-cs-fixer.dist.php`), because new projects adapt it. Do not replace it by a real copyright holder.
 - Develop the skeleton from a Git clone: `ddev start`, `ddev composer install`, copy `.env.example.php` to `.env.php`

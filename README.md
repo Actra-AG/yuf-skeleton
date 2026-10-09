@@ -4,12 +4,20 @@ A minimal "Hello World" application to start a new project with the [yuf](https:
 
 ## Create a project
 
+**With [DDEV](https://ddev.com)** (needs only DDEV and Git, no local PHP or Composer):
+
 ```bash
-composer create-project actra/yuf-skeleton my-project
-cd my-project
+bash <(curl -fsSL https://raw.githubusercontent.com/Actra-AG/yuf-skeleton/main/setup.sh)
 ```
 
-This installs yuf and creates `.env.php` from `.env.example.php`.
+It asks for the project name, creates the project in a new directory, sets `<name>.ddev.site` in `allowedDomains` of
+`.env.php`, makes the first Git commit and opens the Hello World page. Run all further `composer` commands as
+`ddev composer`.
+
+**Without DDEV:** run `composer create-project actra/yuf-skeleton my-project` with PHP 8.5 and the extensions required
+by yuf. Use a web server with `public/` as the document root, HTTPS (yuf redirects HTTP to HTTPS), and all requests for
+non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache). Add your host name to
+`allowedDomains` in `.env.php`.
 
 **After creating the project:**
 
@@ -20,21 +28,6 @@ This installs yuf and creates `.env.php` from `.env.example.php`.
 3. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
    [Actra coding standard](https://github.com/Actra-AG/coding-standard) (`actra/coding-standard`, a dev dependency) and
    has a "Project-specific rules" section for your own rules.
-
-## Run it
-
-**With [DDEV](https://ddev.com)** (PHP 8.5, Apache):
-
-1. Set `allowedDomains` in `.env.php` to `my-project.ddev.site` (DDEV uses the directory name).
-2. Start DDEV and open the project:
-   ```bash
-   ddev start
-   ddev launch
-   ```
-
-**Without DDEV:** use PHP 8.5 with the extensions required by yuf and a web server with `public/` as the document
-root. HTTPS is required (yuf redirects HTTP to HTTPS), and all requests for non-existent files must go to
-`public/index.php` (see `public/.htaccess` for Apache). Add your host name to `allowedDomains` in `.env.php`.
 
 ## Structure
 

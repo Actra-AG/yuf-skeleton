@@ -19,6 +19,7 @@
 !/phpstan.neon
 !/phpunit.xml
 !/README.md
+!/setup.sh
 
 # Allow specific directories
 !/app/
