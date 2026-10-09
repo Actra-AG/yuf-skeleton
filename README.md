@@ -11,6 +11,16 @@ cd my-project
 
 This installs yuf and creates `.env.php` from `.env.example.php`.
 
+**After creating the project:**
+
+1. Replace the placeholders `[Your company or name]` and `[License of your project]` in the file header
+   (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
+2. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the
+   skeleton.
+3. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
+   [Actra coding standard](https://github.com/Actra-AG/coding-standard) (`actra/coding-standard`, a dev dependency) and
+   has a "Project-specific rules" section for your own rules.
+
 ## Run it
 
 **With [DDEV](https://ddev.com)** (PHP 8.5, Apache):
@@ -53,11 +63,8 @@ tests/                      # PHPUnit tests (phpunit.xml)
 docs/                       # documentation of the project (details linked from README.md)
 ```
 
-### Git: allowlist
-
-`.gitignore` ignores everything except the files and directories it explicitly lists. This prevents accidental commits
-of secrets, database dumps, builds or editor files. When you add a new top-level file or directory (e.g. `src/`), add it
-to `.gitignore`, otherwise it is not committed. Check with `git status --ignored` if a file is missing.
+`.gitignore` is an allowlist: add every new top-level file or directory (e.g. `src/`) there, otherwise it is not
+committed; check with `git status --ignored`.
 
 ## Pages and views
 
@@ -70,21 +77,14 @@ request is handled, how to add a page and when to use which route: [docs/views.m
 composer check
 ```
 
-Runs the code style check (PHP-CS-Fixer), PHPStan (level 10, strict) for `app/`, `public/` and `tests/`, and the
-PHPUnit tests. Fix the code style with `composer cs:fix`. With DDEV: `ddev composer check`.
-
-The project follows the [Actra coding standard](https://github.com/Actra-AG/coding-standard)
-(`actra/coding-standard`, a dev dependency). `composer create-project` creates an `AGENTS.md` that refers to it and has
-a "Project-specific rules" section for your own rules. Replace the placeholders `[Your company or name]` and
-`[License of your project]` in the file header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`. Adapt `name`,
-`description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the skeleton.
+Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev composer check`.
 
 ## Production
 
 - Set `'debug' => false`, your real domain(s) in `allowedDomains`, and a valid `logEmailRecipient` in `.env.php`.
 - Install without development tools: `composer install --no-dev`.
 - Use `opcache.validate_timestamps=0` and reset the opcache on every deployment (see
-  [yuf: Production](https://github.com/Actra-AG/yuf/blob/main/docs/setup.md#production)).
+  [yuf: Production](vendor/actra/yuf/docs/setup.md#production)).
 
 ## License
 

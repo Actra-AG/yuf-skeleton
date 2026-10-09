@@ -1,8 +1,7 @@
 # Views and pages
 
 How the example routes in `public/index.php` find their views, and how to add a page. Details of yuf:
-[views.md](https://github.com/Actra-AG/yuf/blob/main/docs/views.md),
-[templates.md](https://github.com/Actra-AG/yuf/blob/main/docs/templates.md).
+[views.md](../vendor/actra/yuf/docs/views.md), [templates.md](../vendor/actra/yuf/docs/templates.md).
 
 ## How a request is handled
 

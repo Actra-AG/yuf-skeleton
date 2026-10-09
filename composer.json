@@ -11,7 +11,7 @@
     "actra/yuf": "^4.57.5"
   },
   "require-dev": {
-    "actra/coding-standard": "^1.10.0",
+    "actra/coding-standard": "^1.11.0",
     "phpunit/phpunit": "^13.4"
   },
   "scripts": {
