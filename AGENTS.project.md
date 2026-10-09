@@ -22,8 +22,8 @@ This project follows the Actra coding standard, installed as development depende
 - TODO: replace this placeholder with the rules of this project (architecture, directories, allowed tools).
 - TODO: how to run and check the application: the URL of the DDEV site (`https://<project>.ddev.site/`) and which
   pages to check (the example app: `/` and `/auto/` give 200, an unknown page gives 404).
-- TODO: adapt the copyright and the license in the file header (`header_comment` in `.php-cs-fixer.dist.php`), then
-  run `composer cs:fix`. Remove this bullet once done.
+- TODO: adapt the copyright and the license in the file header (`copyright:` and `license:` in
+  `.php-cs-fixer.dist.php`), then run `composer cs:fix`. Remove this bullet once done.
 - TODO: adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json` (they still describe the
   skeleton); `license` is the same as in the file header. Remove this bullet once done.
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,

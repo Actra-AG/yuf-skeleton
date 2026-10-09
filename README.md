@@ -23,7 +23,7 @@ non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache
 **After creating the project:**
 
 1. Without `setup.sh`: replace the placeholders `[Your company or name]` and `[License of your project]` in the file
-   header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
+   header (`copyright:` and `license:` in `.php-cs-fixer.dist.php`) and run `composer cs:fix`.
 2. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the
    skeleton.
 3. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
