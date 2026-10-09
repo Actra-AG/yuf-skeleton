@@ -10,8 +10,9 @@ A minimal "Hello World" application to start a new project with the [yuf](https:
 bash <(curl -fsSL https://raw.githubusercontent.com/Actra-AG/yuf-skeleton/main/setup.sh)
 ```
 
-It asks for the project name, creates the project in a new directory, sets `<name>.ddev.site` in `allowedDomains` of
-`.env.php`, makes the first Git commit and opens the Hello World page. Run all further `composer` commands as
+It asks for the project name, the copyright holder and the license (default: MIT), creates the project in a new
+directory, fills in the file header and `allowedDomains` (`<name>.ddev.site`), makes the first Git commit and opens the
+Hello World page. Run all further `composer` commands as
 `ddev composer`.
 
 **Without DDEV:** run `composer create-project actra/yuf-skeleton my-project` with PHP 8.5 and the extensions required
@@ -21,8 +22,8 @@ non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache
 
 **After creating the project:**
 
-1. Replace the placeholders `[Your company or name]` and `[License of your project]` in the file header
-   (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
+1. Without `setup.sh`: replace the placeholders `[Your company or name]` and `[License of your project]` in the file
+   header (`.php-cs-fixer.dist.php`) and run `composer cs:fix`.
 2. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the
    skeleton.
 3. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
