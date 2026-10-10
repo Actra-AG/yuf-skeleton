@@ -26,6 +26,8 @@ This project follows the Actra coding standard, installed as development depende
   `.php-cs-fixer.dist.php`), then run `composer cs:fix`. Remove this bullet once done.
 - TODO: adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json` (they still describe the
   skeleton); `license` is the same as in the file header. Remove this bullet once done.
+- Composer loads all classes (PSR-4: `app\` from `app/`, `tests\` from `tests/`); deploy with
+  `composer install --no-dev --optimize-autoloader` (Composer is needed to build, not on the server).
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,
   for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see
   [docs/views.md](docs/views.md)).

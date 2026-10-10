@@ -57,6 +57,8 @@ tests/                      # PHPUnit tests (phpunit.xml)
 docs/                       # documentation of the project (details linked from README.md)
 ```
 
+Composer loads all classes: `app\` from `app/`, `tests\` from `tests/` (PSR-4, the file name equals the class name).
+
 `.gitignore` is an allowlist: add every new top-level file or directory (e.g. `src/`) there, otherwise it is not
 committed; check with `git status --ignored`. Add new directories with PHP code to `DIRECTORIES` in
 `tests/Unit/StrictTypesTest.php` as well.
@@ -78,7 +80,8 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
 ## Production
 
 - Set `'debug' => false`, your real domain(s) in `allowedDomains`, and a valid `logEmailRecipient` in `.env.php`.
-- Install without development tools: `composer install --no-dev`.
+- Build `vendor/` without development tools and with an optimized autoloader:
+  `composer install --no-dev --optimize-autoloader`. Composer is needed to build, not on the server.
 - On every deployment, reset the opcache (`opcache.validate_timestamps=0`) and delete `app/cache/v*/`: without
   `debug`, changed templates are not compiled again (see [yuf: Production](vendor/actra/yuf/docs/setup.md#production)).
 

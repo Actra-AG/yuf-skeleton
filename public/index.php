@@ -17,9 +17,9 @@ use actra\yuf\core\ViewContext;
 use actra\yuf\core\ViewMap;
 use app\view\frontend\IndexView;
 
-require __DIR__ . '/../vendor/actra/yuf/src/Core.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-// Registers actra/autoloader (classes with the prefix "app\" are loaded from app/) and creates missing app/ directories
+// Reads .env.php and creates missing app/ directories; Composer loads the classes of yuf and of app/
 $core = Core::fromEnvironment(
     envFilePath: __DIR__ . '/../.env.php',
     copyrightYear: 2026,
