@@ -37,7 +37,7 @@ final class StrictTypesTest extends TestCase
                 array_push($files, ...$rootFiles);
             }
         }
-        foreach (self::DIRECTORIES as $directory) {
+        foreach (StrictTypesTest::DIRECTORIES as $directory) {
             $iterator = new RecursiveIteratorIterator(
                 iterator: new RecursiveCallbackFilterIterator(
                     iterator: new RecursiveDirectoryIterator(
@@ -46,7 +46,7 @@ final class StrictTypesTest extends TestCase
                     ),
                     callback: static fn(SplFileInfo $file): bool => !in_array(
                         needle: substr(string: $file->getPathname(), offset: strlen(string: $root) + 1),
-                        haystack: self::EXCLUDED,
+                        haystack: StrictTypesTest::EXCLUDED,
                         strict: true,
                     ),
                 ),
