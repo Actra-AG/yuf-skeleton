@@ -58,12 +58,14 @@ docs/                       # documentation of the project (details linked from 
 ```
 
 `.gitignore` is an allowlist: add every new top-level file or directory (e.g. `src/`) there, otherwise it is not
-committed; check with `git status --ignored`.
+committed; check with `git status --ignored`. Add new directories with PHP code to `DIRECTORIES` in
+`tests/Unit/StrictTypesTest.php` as well.
 
 ## Pages and views
 
 `public/index.php` has two routes: `/` registers each view in a `ViewMap`, `/auto/` finds the view by file name. How a
-request is handled, how to add a page and when to use which route: [docs/views.md](docs/views.md).
+request is handled, how to add a page, when to use which route and optional features (login page, navigation, English
+texts of yuf): [docs/views.md](docs/views.md).
 
 ## Checks
 

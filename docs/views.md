@@ -63,3 +63,18 @@ the template of `auto` has a fixed title.
 **When to use which:** use the `ViewMap` when views need dependencies (repositories, services) or meaningful class
 names, which is the case for most pages of an application. Use the automatic detection for many simple or static pages
 that need no dependencies.
+
+## Optional features
+
+The example uses none of them; add them when the project needs them (details in
+[views.md](../vendor/actra/yuf/docs/views.md)):
+
+- **Login page:** `new RouteCollection(routes: [...], loginPath: '/login.html')` redirects visitors without a login
+  from a protected page to the login page with `?returnTo=…`; the login page redirects back to
+  `LoginRedirect::findReturnPath()` (see [session-and-login.md](../vendor/actra/yuf/docs/session-and-login.md)).
+- **Navigation:** `prepareHttpResponse(navigationProvider: …)` builds the navigation per request; views read it with
+  `$this->context->getNavigation()`.
+- **Texts of yuf:** tables and login results have German texts by default. Projects in other languages pass
+  `messages: TableMessages::english()` to `SmartTable`, `DbResultTable` and `TableHelper::createDbResultTable()` (see
+  [templates.md](../vendor/actra/yuf/docs/templates.md)), and use
+  `AuthResultEnum::label(messages: AuthResultMessages::english())`, or own texts in the constructors.

@@ -12,15 +12,8 @@ use actra\autoloader\AutoloaderPath;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// The classes of yuf and of the application are loaded by actra/autoloader, as in production (not by Composer)
-$autoloader = Autoloader::register();
-$autoloader->addPath(
-    autoloaderPath: new AutoloaderPath(
-        path: __DIR__ . '/../vendor/actra/yuf/src/',
-        prefix: 'actra\\yuf\\',
-    ),
-);
-$autoloader->addPath(
+// yuf is loaded by Composer; the classes of the application by actra/autoloader, as in production
+Autoloader::register()->addPath(
     autoloaderPath: new AutoloaderPath(
         path: __DIR__ . '/../app/',
         prefix: 'app\\',

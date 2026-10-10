@@ -30,7 +30,8 @@ This project follows the Actra coding standard, installed as development depende
   for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see
   [docs/views.md](docs/views.md)).
 - Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
-  through `Core` without globals.
+  through `Core` without globals. `tests/Unit/StrictTypesTest.php` is the strict-types guard test: add new tracked
+  directories with PHP code to its `DIRECTORIES`.
 
 ## Deviations from the global standard
 

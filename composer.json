@@ -8,10 +8,10 @@
   "require": {
     "php": ">=8.5",
     "actra/autoloader": "^1.2.0",
-    "actra/yuf": "^4.67.3"
+    "actra/yuf": "^5.0.0"
   },
   "require-dev": {
-    "actra/coding-standard": "^1.17.0",
+    "actra/coding-standard": "^1.19.0",
     "phpunit/phpunit": "^13.4"
   },
   "scripts": {

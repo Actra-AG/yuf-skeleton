@@ -13,6 +13,3 @@ parameters:
     excludePaths:
         # Compiled templates, generated at runtime
         - app/cache (?)
-    # yuf classes are loaded by actra/autoloader, not by Composer
-    scanDirectories:
-        - vendor/actra/yuf/src
