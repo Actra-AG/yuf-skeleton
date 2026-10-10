@@ -7,7 +7,7 @@
   "license": "MIT",
   "require": {
     "php": ">=8.5",
-    "actra/yuf": "^5.1.0"
+    "actra/yuf": "^5.1.1"
   },
   "autoload": {
     "psr-4": {
@@ -20,7 +20,7 @@
     }
   },
   "require-dev": {
-    "actra/coding-standard": "^1.20.0",
+    "actra/coding-standard": "^1.22.0",
     "phpunit/phpunit": "^13.4"
   },
   "scripts": {
