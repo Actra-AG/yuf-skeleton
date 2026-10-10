@@ -22,11 +22,13 @@ non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache
 
 **After creating the project:**
 
-1. Without `setup.sh`: replace the placeholders `[Your company or name]` and `[License of your project]` in the file
+1. Set `'debug' => true` in `.env.php` on your development machine: the error pages then show the details of the
+   exception. `.env.example.php` ships `false`, the value for production.
+2. Without `setup.sh`: replace the placeholders `[Your company or name]` and `[License of your project]` in the file
    header (`copyright:` and `license:` in `.php-cs-fixer.dist.php`) and run `composer cs:fix`.
-2. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the
+3. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the
    skeleton.
-3. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
+4. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
    [Actra coding standard](https://github.com/Actra-AG/coding-standard) (`actra/coding-standard`, a dev dependency) and
    has a "Project-specific rules" section for your own rules.
 
@@ -79,11 +81,19 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
 
 ## Production
 
-- Set `'debug' => false`, your real domain(s) in `allowedDomains`, and a valid `logEmailRecipient` in `.env.php`.
+- Keep `'debug' => false`, and set your real domain(s) in `allowedDomains` and a valid `logEmailRecipient` in
+  `.env.php`.
+- Set `zend.exception_ignore_args=On` in the PHP configuration: stack traces then carry no arguments (passwords,
+  tokens) into the error log.
+- Behind a reverse proxy or load balancer, let the web server set `REMOTE_ADDR` to the client address (e.g. Apache
+  `mod_remoteip`): yuf reads the client IP from `REMOTE_ADDR` only.
 - Build `vendor/` without development tools and with an optimized autoloader:
   `composer install --no-dev --optimize-autoloader`. Composer is needed to build, not on the server.
 - On every deployment, reset the opcache (`opcache.validate_timestamps=0`) and delete `app/cache/v*/`: without
-  `debug`, changed templates are not compiled again (see [yuf: Production](vendor/actra/yuf/docs/setup.md#production)).
+  `debug`, changed templates are not compiled again.
+
+Details: [yuf: Production](vendor/actra/yuf/docs/setup.md#production) and
+[yuf: Host and client IP address](vendor/actra/yuf/docs/setup.md#host-and-client-ip-address).
 
 ## License
 

@@ -17,8 +17,8 @@ return [
         'my-project.ddev.site',
     ],
     'logEmailRecipient' => 'error@example.com',
-    // Shows error details in the browser; never enable it in production
-    'debug' => true,
+    // true only while developing: the error pages then show details of the exception. Keep it false in production.
+    'debug' => false,
     'robots' => 'noindex,nofollow',
     // Optional, default: the value of debug. Without checks (production), clear app/cache/v*/ on every deployment
     // 'checkTemplateChanges' => false,
