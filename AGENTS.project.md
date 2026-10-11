@@ -34,10 +34,3 @@ This project follows the Actra coding standard, installed as development depende
 - Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
   through `Core` without globals. `tests/Unit/StrictTypesTest.php` is the strict-types guard test: add new tracked
   directories with PHP code to its `DIRECTORIES`.
-
-## Deviations from the global standard
-
-- View classes found by `ClassNameViewFactory` (routes without `viewFactory`, e.g. `app/view/auto/php/welcome.php`)
-  have a lowercase class name equal to the file title (`welcome`) in the namespace `app\view\<viewGroup>\php`, not
-  PascalCase ([naming.md](vendor/actra/coding-standard/standards/naming.md)). Reason: yuf builds the class name from
-  the requested file name. Applies only to these view classes; everything else in them follows the standard.

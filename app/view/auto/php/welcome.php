@@ -16,7 +16,7 @@ use actra\yuf\core\ViewContext;
 use Override;
 
 // Found by its name for "welcome.html" of the route "/auto/" (ClassNameViewFactory), nothing is registered. The class
-// name equals the file title, therefore it is lowercase (see "Deviations from the global standard" in AGENTS.md).
+// name equals the file title, lowerCamelCase (naming.md of the coding standard, section 2).
 final class welcome extends BaseView
 {
     public function __construct(ViewContext $context)

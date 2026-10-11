@@ -36,9 +36,9 @@ For `https://my-project.ddev.site/auto/welcome.html` (or `/auto/`, the file name
 3. If there is no such class (e.g. `/auto/about.html`), the page is rendered from `html/about.html` without view. If
    there is no content file either, the response is 404.
 
-The class name equals the file title, so these view classes are lowercase (`welcome`). This is the only allowed
-deviation from the naming rules of the coding standard (see `AGENTS.md`). A page without view cannot set values, so
-the template of `auto` has a fixed title.
+The class name equals the file title, so these view classes are lowerCamelCase (`welcome`, `contactForm`), as the
+coding standard requires for yuf view classes ([naming.md](../vendor/actra/coding-standard/standards/naming.md),
+section 2). A page without view cannot set values, so the template of `auto` has a fixed title.
 
 ## Add a page
 
@@ -78,3 +78,6 @@ The example uses none of them; add them when the project needs them (details in
   `messages: TableMessages::english()` to `SmartTable`, `DbResultTable` and `TableHelper::createDbResultTable()` (see
   [templates.md](../vendor/actra/yuf/docs/templates.md)), and use
   `AuthResultEnum::label(messages: AuthResultMessages::english())`, or own texts in the constructors.
+- **Tables:** give every sortable `DbResultTable` a stable secondary order with
+  `$table->addSortTieBreaker(column: 'id')`, so rows with equal sort values keep their order across pages
+  (see [database.md](../vendor/actra/yuf/docs/database.md)).
