@@ -85,6 +85,10 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
   `.env.php`.
 - Set `zend.exception_ignore_args=On` in the PHP configuration: stack traces then carry no arguments (passwords,
   tokens) into the error log.
+- Use PHP 8.5.12 or later (fixes the "php2shell" vulnerabilities CVE-2026-109618/109619) and set the request and
+  upload limits of yuf in `php.ini` or the PHP-FPM pool, e.g. `session.upload_progress.enabled=0` and, without
+  upload forms, `file_uploads=0` and `post_max_size=2M`
+  ([yuf: Request and upload limits](vendor/actra/yuf/docs/setup.md#request-and-upload-limits)).
 - Behind a reverse proxy or load balancer, let the web server set `REMOTE_ADDR` to the client address (e.g. Apache
   `mod_remoteip`): yuf reads the client IP from `REMOTE_ADDR` only.
 - Build `vendor/` without development tools and with an optimized autoloader:
