@@ -26,4 +26,12 @@ This repository follows the Actra coding standard, installed as development depe
   `.php-cs-fixer.dist.php`), because new projects adapt it. Do not replace it by a real copyright holder.
 - Develop the skeleton from a Git clone: `ddev start`, `ddev composer install`, copy `.env.example.php` to `.env.php`
   and set `allowedDomains` to `<directory>.ddev.site` (`composer create-project` does the copy, `git clone` does not).
+- Releases: the commit adds its section to `CHANGELOG.md` and is tagged; pushing the tag publishes the GitHub
+  release (`.github/workflows/release.yml`, template of the coding standard). `.gitattributes` keeps `.github/` and
+  `CHANGELOG.md` out of new projects.
 - Run the application (DDEV): https://yuf-skeleton.ddev.site/ (`/` and `/auto/` give 200, an unknown page gives 404).
+
+## Deviations from the global standard
+
+- `CHANGELOG.md` instead of `UPGRADE.md` (`standards/versioning.md`, section 1). Reason: projects copy the skeleton
+  once and are never upgraded from it; they follow yuf's `UPGRADE.md`.

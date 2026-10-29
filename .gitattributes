@@ -1,0 +1,4 @@
+# Files of the skeleton repository that new projects do not get (composer create-project installs the archive)
+/.gitattributes export-ignore
+/.github export-ignore
+/CHANGELOG.md export-ignore
