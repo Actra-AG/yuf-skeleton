@@ -31,6 +31,9 @@ non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache
 4. Fill in the `TODO:` items in `AGENTS.md`. It refers to the
    [Actra coding standard](https://github.com/Actra-AG/coding-standard) (`actra/coding-standard`, a dev dependency) and
    has a "Project-specific rules" section for your own rules.
+5. Before the first deployment: copy `vendor/actra/coding-standard/templates/deploy.json` to the project root, set
+   `host` (SSH alias) and `path` (project root on the server), commit it and deploy with `vendor/bin/deploy`
+   ([tooling.md](vendor/actra/coding-standard/standards/tooling.md), section 8).
 
 ## Structure
 

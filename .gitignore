@@ -15,6 +15,7 @@
 !/CLAUDE.md
 !/LICENSE
 !/composer.json
+!/deploy.json
 !/phpstan-baseline.neon
 !/phpstan.neon
 !/phpunit.xml
