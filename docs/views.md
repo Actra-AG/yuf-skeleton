@@ -12,10 +12,12 @@ How the example routes in `public/index.php` find their views, and how to add a 
 
 ### With ViewMap
 
-For `https://my-project.ddev.site/` (or `/index.html`):
+For `https://my-project.ddev.site/` (`/index.html` redirects to `/`, so each page has one URL):
 
-1. `public/index.php` creates `Core` with `Core::fromEnvironment()` (it reads `.env.php`) and registers the routes.
-2. The route `/` with the view group `frontend` matches. The file name defaults to `index.html`.
+1. `public/index.php` creates the application with `App::fromEnvironment()` (it reads `.env.php`), adds the language
+   and the routes with `withLanguage()` and `withHtmlRoute()`, and runs it.
+2. The route `/` with the view group `frontend` matches. The file name defaults to `index.html`
+   (`defaultFileTitle: 'index'`).
 3. The `ViewMap` of the route maps the file name `index` to the view `app\view\frontend\IndexView`; yuf creates it with
    the `ViewContext` of the request. Its `execute()` method sets the values for the page.
 4. The template `templates/default.html` is rendered, and `<tst:loadSubTpl tplfile="{this}"/>` includes the content
@@ -28,7 +30,8 @@ HTML responses are not cached by browsers; a page without personal data can call
 
 ### Automatic view detection
 
-For `https://my-project.ddev.site/auto/welcome.html` (or `/auto/`, the file name defaults to `welcome.html`):
+For `https://my-project.ddev.site/auto/` (the file name defaults to `welcome.html`, `/auto/welcome.html` redirects to
+`/auto/`):
 
 1. The route `/auto/` with the view group `auto` matches. It has no `viewFactory`.
 2. yuf builds the class name from the view group and the file title: `app\view\auto\php\welcome`, loaded from
@@ -69,11 +72,11 @@ that need no dependencies.
 The example uses none of them; add them when the project needs them (details in
 [views.md](../vendor/actra/yuf/docs/views.md)):
 
-- **Login page:** `new RouteCollection(routes: [...], loginPath: '/login.html')` redirects visitors without a login
+- **Login page:** `->withLoginPath(loginPath: '/login.html')` in `public/index.php` redirects visitors without a login
   from a protected page to the login page with `?returnTo=…`; the login page redirects back to
   `LoginRedirect::findReturnPath()` (see [session-and-login.md](../vendor/actra/yuf/docs/session-and-login.md)).
-- **Navigation:** `prepareHttpResponse(navigationProvider: …)` builds the navigation per request; views read it with
-  `$this->context->getNavigation()`.
+- **Navigation:** `->withNavigation(navigationProvider: …)` in `public/index.php` builds the navigation per request;
+  views read it with `$this->context->getNavigation()`.
 - **Texts of yuf:** tables and login results have German texts by default. Projects in other languages pass
   `messages: TableMessages::english()` to `SmartTable`, `DbResultTable` and `TableHelper::createDbResultTable()` (see
   [templates.md](../vendor/actra/yuf/docs/templates.md)), and use

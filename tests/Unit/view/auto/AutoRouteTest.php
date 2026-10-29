@@ -9,56 +9,33 @@ declare(strict_types=1);
 
 namespace tests\Unit\view\auto;
 
-use actra\yuf\Core;
-use actra\yuf\core\ContentType;
-use actra\yuf\core\CoreSettings;
-use actra\yuf\core\EnvironmentSettings;
-use actra\yuf\core\HttpRequest;
 use actra\yuf\core\HttpResponse;
 use actra\yuf\core\HttpStatusCodeEnum;
-use actra\yuf\core\Route;
-use actra\yuf\core\RouteCollection;
+use actra\yuf\core\RecordingResponseSender;
+use actra\yuf\core\ResponseSender;
 use actra\yuf\exception\NotFoundException;
-use FilesystemIterator;
 use Override;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
+use tests\Double\TestApplication;
 
 /**
- * Renders the pages of the route "/auto/" (automatic view detection, no viewFactory) through yuf, like IndexViewTest.
+ * The route `/auto/` finds its views by the file name (`ClassNameViewFactory`), without registration.
  */
 final class AutoRouteTest extends TestCase
 {
-    private string $workDirectory;
+    private TestApplication $testApplication;
 
     #[Override]
     protected function setUp(): void
     {
-        $this->workDirectory = sys_get_temp_dir() . '/yuf-skeleton-test-' . bin2hex(string: random_bytes(length: 8)) . '/';
-        mkdir(directory: $this->workDirectory . 'cache', recursive: true);
-        mkdir(directory: $this->workDirectory . 'logs');
+        $this->testApplication = new TestApplication();
     }
 
     #[Override]
     protected function tearDown(): void
     {
-        // Core::prepareHttpResponse() registers the exception handler, which must not stay for other tests
-        restore_exception_handler();
-        $iterator = new RecursiveIteratorIterator(
-            iterator: new RecursiveDirectoryIterator(
-                directory: $this->workDirectory,
-                flags: FilesystemIterator::SKIP_DOTS,
-            ),
-            mode: RecursiveIteratorIterator::CHILD_FIRST,
-        );
-        /** @var SplFileInfo $entry */
-        foreach ($iterator as $entry) {
-            $entry->isDir() ? rmdir(directory: $entry->getPathname()) : unlink(filename: $entry->getPathname());
-        }
-        rmdir(directory: $this->workDirectory);
+        $this->testApplication->cleanUp();
     }
 
     /**
@@ -68,7 +45,6 @@ final class AutoRouteTest extends TestCase
     {
         return [
             'default file, view found by file name' => ['/auto/', '<h1>Welcome!</h1>'],
-            'view found by file name' => ['/auto/welcome.html', '<h1>Welcome!</h1>'],
             'HTML only, no view' => ['/auto/about.html', '<h1>About</h1>'],
         ];
     }
@@ -84,6 +60,19 @@ final class AutoRouteTest extends TestCase
         $this->assertStringContainsString($expectedHeading, $content);
     }
 
+    public function testDefaultFileNameIsRedirectedToThePathOfTheRoute(): void
+    {
+        $httpResponse = RecordingResponseSender::capture(
+            action: function (ResponseSender $responseSender): void {
+                $this->testApplication->createApp(uri: '/auto/welcome.html', responseSender: $responseSender)
+                    ->prepare();
+            },
+        );
+
+        $this->assertSame(HttpStatusCodeEnum::HTTP_MOVED_PERMANENTLY, $httpResponse->httpStatusCode);
+        $this->assertSame('https://example.com/auto/', $httpResponse->getHeader(key: 'Location'));
+    }
+
     public function testUnknownPageIsNotFound(): void
     {
         // Without class and content file: the exception handler of yuf answers with the 404 error page
@@ -94,45 +83,6 @@ final class AutoRouteTest extends TestCase
 
     private function handle(string $uri): HttpResponse
     {
-        $appDirectory = dirname(path: __DIR__, levels: 4) . '/app/';
-        $core = new Core(
-            settings: new CoreSettings(
-                environmentSettings: new EnvironmentSettings(
-                    errorReporting: E_ALL,
-                    timeZone: 'UTC',
-                    allowedDomains: ['example.com'],
-                    logEmailRecipient: '',
-                    debug: false,
-                    robots: 'noindex',
-                ),
-                copyrightYear: 2026,
-                documentRoot: $this->workDirectory . 'public/',
-                frameworkDirectory: dirname(path: __DIR__, levels: 4) . '/vendor/actra/yuf/src/',
-                baseDirectory: $this->workDirectory,
-                appDirectory: $appDirectory,
-                cacheDirectory: $this->workDirectory . 'cache/',
-                errorDocsDirectory: $appDirectory . 'error_docs/',
-                logDirectory: $this->workDirectory . 'logs/',
-                settingsDirectory: $appDirectory . 'settings/',
-                snippetsDirectory: $appDirectory . 'snippets/',
-                viewDirectory: $appDirectory . 'view/',
-            ),
-            httpRequest: new HttpRequest(host: 'example.com', uri: $uri),
-        );
-
-        return $core->prepareHttpResponse(
-            routeCollection: new RouteCollection(
-                routes: [
-                    new Route(
-                        path: '/auto/',
-                        viewDirectory: $core->viewDirectory,
-                        viewGroup: 'auto',
-                        defaultFileName: 'welcome.html',
-                        defaultContentType: ContentType::createHtml(),
-                    ),
-                ],
-            ),
-            individualSessionHandler: false,
-        );
+        return $this->testApplication->createApp(uri: $uri, responseSender: new RecordingResponseSender())->prepare();
     }
 }

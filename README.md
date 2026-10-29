@@ -41,12 +41,12 @@ public/
   .htaccess                 # sends all requests to index.php
 app/
   view/frontend/            # view group "frontend" of the route "/"
-    IndexView.php           # view class for /index.html (registered in public/index.php)
-    html/index.html         # content of /index.html
+    IndexView.php           # view class for / (registered in public/index.php)
+    html/index.html         # content of /
     templates/default.html  # page layout around the content
   view/auto/                # view group "auto" of the route "/auto/" (automatic view detection)
-    php/welcome.php         # view class for /auto/welcome.html (found by file name, not registered)
-    html/welcome.html       # content of /auto/welcome.html (default file of /auto/)
+    php/welcome.php         # view class for /auto/ (found by file name, not registered)
+    html/welcome.html       # content of /auto/ (default file of /auto/)
     html/about.html         # content of /auto/about.html (no view)
     templates/default.html  # page layout of this view group
   error_docs/               # error pages (debug, not found, unauthorized, default)
@@ -71,6 +71,9 @@ committed; check with `git status --ignored`. Add new directories with PHP code 
 request is handled, how to add a page, when to use which route and optional features (login page, navigation, English
 texts of yuf): [docs/views.md](docs/views.md).
 
+Moving a project from the old Actra framework to this skeleton: follow the
+[migration guide of yuf](vendor/actra/yuf/docs/upgrade/from-framework.md).
+
 ## Checks
 
 ```bash
@@ -93,8 +96,8 @@ Runs the code style check, PHPStan and the PHPUnit tests. With DDEV: `ddev compo
   `mod_remoteip`): yuf reads the client IP from `REMOTE_ADDR` only.
 - Build `vendor/` without development tools and with an optimized autoloader:
   `composer install --no-dev --optimize-autoloader`. Composer is needed to build, not on the server.
-- On every deployment, reset the opcache (`opcache.validate_timestamps=0`) and delete `app/cache/v*/`: without
-  `debug`, changed templates are not compiled again.
+- On every deployment, reset the opcache (`opcache.validate_timestamps=0`) and delete `app/cache/v[0-9]*/`: without
+  `debug`, changed templates are not compiled again. Not `app/cache/v*/`: that also deletes `app/cache/values/`.
 
 Details: [yuf: Production](vendor/actra/yuf/docs/setup.md#production) and
 [yuf: Host and client IP address](vendor/actra/yuf/docs/setup.md#host-and-client-ip-address).

@@ -31,6 +31,7 @@ This project follows the Actra coding standard, installed as development depende
 - Views are classes in `app/view/<viewGroup>/`, registered in the `ViewMap` of their route (`public/index.php`), or,
   for routes without `viewFactory`, found by file name in `app/view/<viewGroup>/php/` (see
   [docs/views.md](docs/views.md)).
-- Tests (PHPUnit) are in `tests/Unit`; `tests/Unit/view/frontend/IndexViewTest.php` shows how to render a view
-  through `Core` without globals. `tests/Unit/StrictTypesTest.php` is the strict-types guard test: add new tracked
-  directories with PHP code to its `DIRECTORIES`.
+- Tests (PHPUnit) are in `tests/Unit`; `tests/Double/TestApplication.php` builds the application of
+  `public/index.php` without globals (keep its routes in line), `tests/Unit/view/frontend/IndexViewTest.php` shows how
+  to render a page and test a redirect with it. `tests/Unit/StrictTypesTest.php` is the strict-types guard test: add
+  new tracked directories with PHP code to its `DIRECTORIES`.
