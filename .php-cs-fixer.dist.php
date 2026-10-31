@@ -8,13 +8,22 @@
 declare(strict_types=1);
 
 use PhpCsFixer\Config;
+use PhpCsFixer\Config\RuleCustomisationPolicyInterface;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 /** @var array<string, bool|array<string, mixed>> $rules */
 $rules = require __DIR__ . '/vendor/actra/coding-standard/config/php-cs-fixer.php';
+/**
+ * @var Closure(
+ *     string $copyright,
+ *     string $license,
+ *     list<array{path: string, license: string, contains?: string}> $thirdParty
+ * ): array{rule: array<string, mixed>, policy: RuleCustomisationPolicyInterface} $headerFactory
+ */
+$headerFactory = require __DIR__ . '/vendor/actra/coding-standard/config/php-cs-fixer-header.php';
 // Replace the placeholders by the copyright holder and the license of your project, then run cs:fix
-$header = (require __DIR__ . '/vendor/actra/coding-standard/config/php-cs-fixer-header.php')(
+$header = $headerFactory(
     copyright: '[Your company or name]',
     // MIT for public libraries, proprietary for closed projects
     license: '[License of your project]',
