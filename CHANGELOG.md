@@ -4,6 +4,12 @@ Changes of the yuf skeleton, newest first. A new project copies the skeleton onc
 yuf's [UPGRADE.md](https://github.com/Actra-AG/yuf/blob/main/UPGRADE.md) in existing projects instead. Older
 versions: see the Git tags.
 
+## v1.18.8 (2026-11-08)
+
+- Requires `actra/yuf` ^8.14.1 (v8.13.0 and v8.14.0 are withdrawn; French and Italian texts of forms, tables and
+  login results).
+- Requires `actra/coding-standard` ^2.3 (rules for AI assistants and public repositories; no action needed).
+
 ## v1.18.7 (2026-11-08)
 
 - `setup.sh` sets `'debug' => true` in `.env.php` of the new DDEV project (error details, changed templates without
