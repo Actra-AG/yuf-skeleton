@@ -11,9 +11,8 @@ bash <(curl -fsSL https://raw.githubusercontent.com/Actra-AG/yuf-skeleton/main/s
 ```
 
 It asks for the project name, the copyright holder and the license (default: MIT), creates the project in a new
-directory, fills in the file header and `allowedDomains` (`<name>.ddev.site`), makes the first Git commit and opens the
-Hello World page. Run all further `composer` commands as
-`ddev composer`.
+directory, fills in the file header and `allowedDomains` (`<name>.ddev.site`), sets `'debug' => true` in `.env.php`,
+makes the first Git commit and opens the Hello World page. Run all further `composer` commands as `ddev composer`.
 
 **Without DDEV:** run `composer create-project actra/yuf-skeleton my-project` with PHP 8.5 and the extensions required
 by yuf. Use a web server with `public/` as the document root, HTTPS (yuf redirects HTTP to HTTPS), and all requests for
@@ -22,8 +21,8 @@ non-existent files sent to `public/index.php` (see `public/.htaccess` for Apache
 
 **After creating the project:**
 
-1. Set `'debug' => true` in `.env.php` on your development machine: the error pages then show the details of the
-   exception. `.env.example.php` ships `false`, the value for production.
+1. Without `setup.sh`: set `'debug' => true` in `.env.php` on your development machine: the error pages then show the
+   details of the exception. `.env.example.php` ships `false`, the value for production.
 2. Without `setup.sh`: replace the placeholders `[Your company or name]` and `[License of your project]` in the file
    header (`copyright:` and `license:` in `.php-cs-fixer.dist.php`) and run `composer cs:fix`.
 3. Adapt `name`, `description`, `homepage`, `keywords` and `license` in `composer.json`: they still describe the

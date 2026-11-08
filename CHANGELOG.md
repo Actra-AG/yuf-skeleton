@@ -4,6 +4,11 @@ Changes of the yuf skeleton, newest first. A new project copies the skeleton onc
 yuf's [UPGRADE.md](https://github.com/Actra-AG/yuf/blob/main/UPGRADE.md) in existing projects instead. Older
 versions: see the Git tags.
 
+## v1.18.7 (2026-11-08)
+
+- `setup.sh` sets `'debug' => true` in `.env.php` of the new DDEV project (error details, changed templates without
+  clearing the cache). `.env.example.php` keeps `false` for production.
+
 ## v1.18.6 (2026-11-08)
 
 - `setup.sh` refuses to run inside a DDEV project.

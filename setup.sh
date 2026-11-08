@@ -63,6 +63,10 @@ perl -pi -e 's/^(\s*"license": )"[^"]*"/$1"$ENV{YUF_LICENSE}"/' composer.json
 # The file header is done: remove its TODO from AGENTS.md
 perl -0pi -e 's/- TODO: adapt the copyright and the license.*?Remove this bullet once done\.\n//s' AGENTS.md
 ddev composer cs > /dev/null || fail "The code style check failed after filling in the file header."
+# A DDEV project is a development environment: error details and changed templates without clearing the cache.
+# .env.example.php keeps false, the value for production; .env.php is not committed.
+perl -pi -e "s/^(\s*'debug' => )false,/\$1true,/" .env.php
+grep --quiet --fixed-strings "'debug' => true," .env.php || fail "Could not enable debug in .env.php."
 
 git init --quiet --initial-branch=main
 git add --all
