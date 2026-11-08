@@ -4,6 +4,14 @@ Changes of the yuf skeleton, newest first. A new project copies the skeleton onc
 yuf's [UPGRADE.md](https://github.com/Actra-AG/yuf/blob/main/UPGRADE.md) in existing projects instead. Older
 versions: see the Git tags.
 
+## v1.18.5 (2026-11-08)
+
+- Requires `actra/yuf` ^8.11 (typed login target `LoginTarget`, login page on another host, HTML body and attachments
+  of received mails). `docs/views.md` shows `withLoginTarget()` instead of `withLoginPath()`.
+- Requires `actra/coding-standard` ^2.1 (`UPDATE` and `DELETE` only by primary or unique key).
+- `AGENTS.md` of new projects is shorter: no rules that the coding standard, `composer.json` or `README.md` already
+  state; new `TODO:` for the frontend review.
+
 ## v1.18.4 (2026-10-31)
 
 - Requires `actra/yuf` ^8.7.1 (routes with the language of the request, `SentMailListener`, new `App` shortcuts) and

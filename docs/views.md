@@ -72,9 +72,12 @@ that need no dependencies.
 The example uses none of them; add them when the project needs them (details in
 [views.md](../vendor/actra/yuf/docs/views.md)):
 
-- **Login page:** `->withLoginPath(loginPath: '/login.html')` in `public/index.php` redirects visitors without a login
-  from a protected page to the login page with `?returnTo=…`; the login page redirects back to
-  `LoginRedirect::findReturnPath()` (see [session-and-login.md](../vendor/actra/yuf/docs/session-and-login.md)).
+- **Login page:** `->withLoginTarget(loginTarget: LoginTarget::local(path: '/login.html'))` in `public/index.php`
+  redirects visitors without a login from a protected page to the login page with `?returnTo=…`; the login page
+  redirects back to `LoginRedirect::findReturnPath()` (see
+  [session-and-login.md](../vendor/actra/yuf/docs/session-and-login.md)). A login page on another host is possible
+  with `LoginTarget::remote(url:)` and `LoginRedirect::findReturnUrl(allowedHosts:)` (see
+  [views.md](../vendor/actra/yuf/docs/views.md#login-page-on-another-host)).
 - **Navigation:** `->withNavigation(navigationProvider: …)` in `public/index.php` builds the navigation per request;
   views read it with `$this->context->getNavigation()`.
 - **Texts of yuf:** tables and login results have German texts by default. Projects in other languages pass
