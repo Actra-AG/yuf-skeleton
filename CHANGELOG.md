@@ -4,6 +4,13 @@ Changes of the yuf skeleton, newest first. A new project copies the skeleton onc
 yuf's [UPGRADE.md](https://github.com/Actra-AG/yuf/blob/main/UPGRADE.md) in existing projects instead. Older
 versions: see the Git tags.
 
+## v1.18.6 (2026-11-08)
+
+- `setup.sh` refuses to run inside a DDEV project.
+- Requires `actra/yuf` ^8.13 (login page on another host with a server-side hand-over, shared login, test helpers
+  for views). `docs/views.md` shows `LoginTarget::remote(url:, loginHandOver:, handOverPath:)`.
+- Requires `actra/coding-standard` ^2.2 (no named variadic arguments of PHP built-ins).
+
 ## v1.18.5 (2026-11-08)
 
 - Requires `actra/yuf` ^8.11 (typed login target `LoginTarget`, login page on another host, HTML body and attachments
