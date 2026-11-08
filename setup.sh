@@ -15,6 +15,12 @@ command -v ddev > /dev/null || fail "DDEV is not installed, see https://ddev.com
 command -v git > /dev/null || fail "Git is not installed."
 git config user.name > /dev/null && git config user.email > /dev/null \
   || fail "Set your Git identity first: git config --global user.name/user.email"
+# ddev config inside an existing DDEV project would reconfigure that project
+dir="$(pwd)"
+while [[ "$dir" != "/" ]]; do
+  [[ ! -f "$dir/.ddev/config.yaml" ]] || fail "$dir is a DDEV project: run setup.sh in a directory outside of it."
+  dir="$(dirname "$dir")"
+done
 
 # Reads from the terminal, also when the script itself comes from stdin
 ask() {
