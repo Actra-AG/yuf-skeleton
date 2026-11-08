@@ -7,7 +7,7 @@
   "license": "MIT",
   "require": {
     "php": ">=8.5",
-    "actra/yuf": "^8.14.1"
+    "actra/yuf": "^8.17.0"
   },
   "autoload": {
     "psr-4": {
@@ -20,7 +20,7 @@
     }
   },
   "require-dev": {
-    "actra/coding-standard": "^2.3",
+    "actra/coding-standard": "^2.4",
     "phpunit/phpunit": "^13.4.4"
   },
   "scripts": {
@@ -29,11 +29,11 @@
       "@php -r \"copy('AGENTS.project.md', 'AGENTS.md'); unlink('AGENTS.project.md'); file_exists('LICENSE') && unlink('LICENSE'); unlink('setup.sh');\"",
       "@php -r \"file_put_contents('.gitignore', str_replace('!/composer.json' . chr(10), '!/composer.json' . chr(10) . '!/composer.lock' . chr(10), file_get_contents('.gitignore')));\""
     ],
-    "cs": "php-cs-fixer check --diff",
-    "cs:fix": "php-cs-fixer fix",
-    "phpstan": "phpstan analyse --memory-limit=-1",
-    "phpstan:baseline": "phpstan analyse --memory-limit=-1 --generate-baseline",
-    "test": "phpunit",
+    "cs": "php-cs-fixer check --diff --show-progress=none",
+    "cs:fix": "php-cs-fixer fix --show-progress=none",
+    "phpstan": "phpstan analyse --memory-limit=-1 --no-progress",
+    "phpstan:baseline": "phpstan analyse --memory-limit=-1 --no-progress --generate-baseline",
+    "test": "phpunit --no-progress",
     "check": [
       "@cs",
       "@phpstan",
