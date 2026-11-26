@@ -4,6 +4,13 @@ Changes of the yuf skeleton, newest first. A new project copies the skeleton onc
 yuf's [UPGRADE.md](https://github.com/Actra-AG/yuf/blob/main/UPGRADE.md) in existing projects instead. Older
 versions: see the Git tags.
 
+## v1.18.10 (2026-11-26)
+
+- Requires `actra/yuf` ^8.22 (`allowedDomains` accepts `*.example.ch` and a `HostPolicy`, required
+  `DbSettings(timeZone:)`, response headers of a view, cURL requests pinned to checked IP addresses). The test helper
+  passes `allowedDomains` as `HostPatterns`.
+- Requires `actra/coding-standard` ^2.6 (deployment targets and live sync of `vendor/bin/deploy`; no action needed).
+
 ## v1.18.9 (2026-11-08)
 
 - Requires `actra/yuf` ^8.17 (required `Clock` arguments, shared login checks at every request,
